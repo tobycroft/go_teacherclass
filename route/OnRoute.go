@@ -20,6 +20,9 @@ func OnRoute(router *gin.Engine) {
 		{
 			v1.IndexRouter(index)
 		}
-
+		user := version1.Group("user")
+		{
+			v1.UserRouter(user)
+		}
 	}
 }
