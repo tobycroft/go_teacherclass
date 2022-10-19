@@ -8,8 +8,9 @@ import (
 
 const Table = "tc_school_term"
 
-func Api_select() []gorose.Data {
+func Api_select(grade_id interface{}) []gorose.Data {
 	db := tuuz.Db().Table(Table)
+	db.Where("grade_id", grade_id)
 	ret, err := db.Get()
 	if err != nil {
 		Log.Dbrr(err, tuuz.FUNCTION_ALL())

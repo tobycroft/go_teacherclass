@@ -15,7 +15,11 @@ func TermController(route *gin.RouterGroup) {
 }
 
 func class_list(c *gin.Context) {
-	datas := SchoolTermModel.Api_select()
+	grade_id, ok := Input.PostInt64("grade_id", c)
+	if !ok {
+		return
+	}
+	datas := SchoolTermModel.Api_select(grade_id)
 	RET.Success(c, 0, datas, nil)
 }
 
