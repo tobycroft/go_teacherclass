@@ -28,5 +28,9 @@ func OnRoute(router *gin.Engine) {
 		{
 			v1.SchoolRouter(school)
 		}
+		attach := version1.Group("attach")
+		{
+			v1.AttachRouter(attach)
+		}
 	}
 }
