@@ -9,7 +9,8 @@ import (
 
 func IndexController(route *gin.RouterGroup) {
 
-	route.Any("upload", upload)
+	route.Any("upload", index_upload)
+	route.Any("list", index_list)
 }
 
 func index_upload(c *gin.Context) {
@@ -21,7 +22,11 @@ func index_upload(c *gin.Context) {
 	if !ok {
 		return
 	}
-	term_id := Input.SPostDefault("term_id", c, int64(0))
+	term_id, ok := Input.PostInt64("term_id", c)
+	if !ok {
+		return
+	}
+
 	title, ok := Input.SPostString("title", c, true)
 	if !ok {
 		return
@@ -34,7 +39,7 @@ func index_upload(c *gin.Context) {
 	if !ok {
 		return
 	}
-	if id := AttachModel.Api_insert(Type, category, title, content, url); id > 0 {
+	if id := AttachModel.Api_insert(Type, category, term_id, title, content, url); id > 0 {
 		RET.Success(c, 0, nil, nil)
 	} else {
 		RET.Fail(c, 500, nil, nil)
@@ -42,5 +47,14 @@ func index_upload(c *gin.Context) {
 }
 
 func index_list(c *gin.Context) {
+	term_id := Input.SPost("term_id", c, int64(0))
+	Type, ok := Input.PostIn("type", c, []string{"视频", "风采", "照片墙"})
+	if !ok {
+		return
+	}
+	category := Input.SPost("category", c, true)
+	if !ok {
+		return
+	}
 
 }
