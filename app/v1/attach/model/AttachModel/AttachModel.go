@@ -33,7 +33,7 @@ func Api_select(Type, category, term_id interface{}, limit, page int) gorose.Pag
 	if Type != nil {
 		db.Where("type", Type)
 	}
-	if category != nil {
+	if category != "" {
 		db.Where("category", category)
 	}
 	if term_id != nil {
