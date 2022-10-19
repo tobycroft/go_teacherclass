@@ -56,6 +56,10 @@ func index_list(c *gin.Context) {
 		return
 	}
 	category, _ := Input.SPostString("category", c, false)
-	datas := AttachModel.Api_select(Type, category, term_id)
-
+	limit, page, err := Input.PostLimitPage(c)
+	if err != nil {
+		return
+	}
+	datas := AttachModel.Api_select(Type, category, term_id, limit, page)
+	RET.Success(c, 0, datas, nil)
 }
