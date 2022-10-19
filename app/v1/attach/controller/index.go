@@ -2,7 +2,9 @@ package controller
 
 import (
 	"github.com/gin-gonic/gin"
+	"main.go/app/v1/attach/model/AttachModel"
 	"main.go/tuuz/Input"
+	"main.go/tuuz/RET"
 )
 
 func IndexController(route *gin.RouterGroup) {
@@ -31,5 +33,9 @@ func upload(c *gin.Context) {
 	if !ok {
 		return
 	}
-	
+	if id := AttachModel.Api_insert(Type, category, title, content, url); id > 0 {
+		RET.Success(c, 0, nil, nil)
+	} else {
+		RET.Fail(c, 500, nil, nil)
+	}
 }

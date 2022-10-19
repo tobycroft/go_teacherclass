@@ -1,4 +1,4 @@
-package model
+package AttachModel
 
 import (
 	"github.com/tobycroft/gorose-pro"
