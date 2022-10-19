@@ -8,11 +8,12 @@ import (
 
 const Table = "tc_attach"
 
-func Api_insert(Type, category, title, content, url interface{}) int64 {
+func Api_insert(Type, category, term_id, title, content, url interface{}) int64 {
 	db := tuuz.Db().Table(Table)
 	data := map[string]any{
 		"type":     Type,
 		"category": category,
+		"term_id":  term_id,
 		"title":    title,
 		"content":  content,
 		"url":      url,

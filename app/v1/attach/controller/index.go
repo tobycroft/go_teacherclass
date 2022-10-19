@@ -12,7 +12,7 @@ func IndexController(route *gin.RouterGroup) {
 	route.Any("upload", upload)
 }
 
-func upload(c *gin.Context) {
+func index_upload(c *gin.Context) {
 	Type, ok := Input.PostIn("type", c, []string{"视频", "风采", "照片墙"})
 	if !ok {
 		return
@@ -21,6 +21,7 @@ func upload(c *gin.Context) {
 	if !ok {
 		return
 	}
+	term_id := Input.SPostDefault("term_id", c, int64(0))
 	title, ok := Input.SPostString("title", c, true)
 	if !ok {
 		return
@@ -38,4 +39,8 @@ func upload(c *gin.Context) {
 	} else {
 		RET.Fail(c, 500, nil, nil)
 	}
+}
+
+func index_list(c *gin.Context) {
+
 }
