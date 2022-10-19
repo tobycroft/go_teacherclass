@@ -28,14 +28,23 @@ func Api_insert(Type, category, term_id, title, content, url interface{}) int64 
 	}
 }
 
-func Api_select(Type, category interface{}) []gorose.Data {
+func Api_select(Type, category, term_id interface{}, limit, page int) gorose.Paginate {
 	db := tuuz.Db().Table(Table)
-	db.Where("type", Type)
-	db.Where("category", category)
-	ret, err := db.Get()
+	if Type != nil {
+		db.Where("type", Type)
+	}
+	if category != nil {
+		db.Where("category", category)
+	}
+	if term_id != nil {
+		db.Where("term_id", term_id)
+	}
+	db.Limit(limit)
+	db.Page(page)
+	ret, err := db.Paginator()
 	if err != nil {
 		Log.Dbrr(err, tuuz.FUNCTION_ALL())
-		return nil
+		return gorose.Paginate{}
 	} else {
 		return ret
 	}

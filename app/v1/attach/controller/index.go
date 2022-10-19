@@ -47,14 +47,15 @@ func index_upload(c *gin.Context) {
 }
 
 func index_list(c *gin.Context) {
-	term_id := Input.SPost("term_id", c, int64(0))
 	Type, ok := Input.PostIn("type", c, []string{"视频", "风采", "照片墙"})
 	if !ok {
 		return
 	}
-	category := Input.SPost("category", c, true)
+	term_id, ok := Input.PostInt64("term_id", c)
 	if !ok {
 		return
 	}
+	category, _ := Input.SPostString("category", c, false)
+	datas := AttachModel.Api_select(Type, category, term_id)
 
 }
