@@ -1,6 +1,6 @@
 package app_conf
 
-const Project = "tuuzgoweb"
+const Project = "tc"
 const Debug = "tgw"
 const TestMode = false
 const AppMode = "debug"
