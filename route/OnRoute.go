@@ -24,5 +24,9 @@ func OnRoute(router *gin.Engine) {
 		{
 			v1.UserRouter(user)
 		}
+		school := version1.Group("school")
+		{
+			v1.SchoolRouter(school)
+		}
 	}
 }
