@@ -9,5 +9,5 @@ func AttachRouter(route *gin.RouterGroup) {
 	route.Any("/", func(context *gin.Context) {
 		context.String(0, route.BasePath())
 	})
-	controller.IndexController(route.Group("attach"))
+	controller.IndexController(route.Group("indexk"))
 }
