@@ -1,4 +1,4 @@
-package SchoolAreaModel
+package SchoolTermModel
 
 import (
 	"github.com/tobycroft/gorose-pro"
@@ -6,7 +6,7 @@ import (
 	"main.go/tuuz/Log"
 )
 
-const Table = "ps_school_area"
+const Table = "tc_school_term"
 
 func Api_select() []gorose.Data {
 	db := tuuz.Db().Table(Table)
