@@ -26,16 +26,9 @@ func index_upload(c *gin.Context) {
 	if !ok {
 		return
 	}
-
 	title, ok := Input.SPostString("title", c, true)
-	if !ok {
-		return
-	}
 	content, ok := Input.SPostString("content", c, true)
-	if !ok {
-		return
-	}
-	url, ok := Input.SPostString("url", c, true)
+	url, ok := Input.Post("url", c, true)
 	if !ok {
 		return
 	}
