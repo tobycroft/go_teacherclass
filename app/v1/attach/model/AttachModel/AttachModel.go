@@ -30,6 +30,7 @@ func Api_insert(Type, category, term_id, title, content, url interface{}) int64 
 
 func Api_select(Type, category, term_id interface{}, limit, page int) gorose.Paginate {
 	db := tuuz.Db().Table(Table)
+	db.Fields("*", "FROM_UNIXTIME(date)")
 	if Type != nil {
 		db.Where("type", Type)
 	}
