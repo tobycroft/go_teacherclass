@@ -5,7 +5,6 @@ import (
 	"main.go/app/v1/school/model/SchoolGradeModel"
 	"main.go/tuuz/Input"
 	"main.go/tuuz/RET"
-	"time"
 )
 
 func GradeController(route *gin.RouterGroup) {
@@ -18,8 +17,6 @@ func GradeController(route *gin.RouterGroup) {
 func grade_list(c *gin.Context) {
 	datas := SchoolGradeModel.Api_select()
 	for i, data := range datas {
-		data["ttt"] = time.Now().Format("2006-01-02 15:04:05")
-		data["zzz"] = time.Now().Format(time.RFC3339)
 		datas[i] = data
 	}
 	RET.Success(c, 0, datas, nil)
