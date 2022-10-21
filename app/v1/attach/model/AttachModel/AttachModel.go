@@ -40,6 +40,7 @@ func Api_select(Type, category, term_id interface{}, limit, page int) gorose.Pag
 	if term_id != nil {
 		db.Where("term_id", term_id)
 	}
+	db.Where("is_verify", true)
 	db.Limit(limit)
 	db.Page(page)
 	ret, err := db.Paginator()
