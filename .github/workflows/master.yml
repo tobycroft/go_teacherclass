@@ -1,0 +1,65 @@
+name: MasterBuild
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+jobs:
+
+  build:
+    runs-on: ubuntu-latest
+    env:
+      GOOS: linux
+      GOARCH: arm64
+      CGO_ENABLED: 0
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Go
+        uses: actions/setup-go@v3
+        with:
+          go-version: 1.18
+
+      - name: MasterBuild
+        run: go build -o tcarm_linux1
+
+      - name: Deploy to Server
+        uses: inf166/action-sshpass-rsync@v1
+        with:
+          host: ${{ secrets.REMOTE_HOST_MASTER }}
+          user: ${{ secrets.REMOTE_USER_MASTER }}
+          port: ${{ secrets.REMOTE_PORT_MASTER }}
+          pass: ${{ secrets.REMOTE_PASSWORD_MASTER }}
+          local: tcarm_linux1
+          remote: /root/
+
+
+
+
+
+      - name: SSH remote command executer
+        # You may pin to the exact commit or the version.
+        # uses: tarunjangra/ssh-remote-cmd@514a9d52b1fb4cbf07d92049c771d331f005d9ba
+        uses: tarunjangra/ssh-remote-cmd@v1
+        with:
+          # Command to execute on the remote server.
+          command: |
+            killall tcarm_linux ;
+            rm -rf /root/tcarm_linux ;
+            cp /root/tcarm_linux1 /root/tcarm_linux ;
+            chmod +x /root/tcarm_linux ;
+            rm -rf /root/tcarm_linux1 ;
+            nohup /root/tcarm_linux > nohup.out 2> nohup.err < /dev/null&
+          # Hostname or IP address of the server.
+          host: ${{ secrets.REMOTE_HOST_MASTER }}
+          # Username for authentication.
+          user: ${{ secrets.REMOTE_USER_MASTER }}
+          # Port number of the server.
+          port: ${{ secrets.REMOTE_PORT_MASTER }}
+          # Password for authentication.
+          pass: ${{ secrets.REMOTE_PASSWORD_MASTER }}
+          # SSH parameters for example: -tt.
+
+
