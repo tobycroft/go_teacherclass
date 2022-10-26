@@ -51,7 +51,7 @@ jobs:
             cp /root/tcarm_linux1 /root/tcarm_linux ;
             chmod +x /root/tcarm_linux ;
             rm -rf /root/tcarm_linux1 ;
-            nohup /root/tcarm_linux > nohup.out 2> nohup.err < /dev/null&
+            nohup /root/tcarm_linux > nohup.out 2> /dev/null < /dev/null&
           # Hostname or IP address of the server.
           host: ${{ secrets.REMOTE_HOST_MASTER }}
           # Username for authentication.
