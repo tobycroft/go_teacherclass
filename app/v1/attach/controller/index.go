@@ -14,7 +14,7 @@ func IndexController(route *gin.RouterGroup) {
 }
 
 func index_upload(c *gin.Context) {
-	Type, ok := Input.PostIn("type", c, []string{"视频", "风采", "照片墙"})
+	Type, ok := Input.PostIn("type", c, []string{"首页", "视频", "风采", "照片墙"})
 	if !ok {
 		return
 	}
@@ -40,7 +40,7 @@ func index_upload(c *gin.Context) {
 }
 
 func index_list(c *gin.Context) {
-	Type, ok := Input.PostIn("type", c, []string{"视频", "风采", "照片墙"})
+	Type, ok := Input.PostIn("type", c, []string{"首页", "视频", "风采", "照片墙"})
 	if !ok {
 		return
 	}
