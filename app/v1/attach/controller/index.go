@@ -44,10 +44,7 @@ func index_list(c *gin.Context) {
 	if !ok {
 		return
 	}
-	term_id, ok := Input.PostInt64("term_id", c)
-	if !ok {
-		return
-	}
+	term_id := Input.SPost("term_id", c, int64(0))
 	category, _ := Input.SPostString("category", c, false)
 	limit, page, err := Input.PostLimitPage(c)
 	if err != nil {
